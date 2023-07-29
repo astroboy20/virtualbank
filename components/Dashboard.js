@@ -81,7 +81,7 @@ const Dashboard = () => {
         borderRadius="8px"
         boxShadow="0px 4px 10px rgba(0, 0, 0, 0.1)"
       >
-        <Box textAlign="left" padding="10px 0">Welcome back {displayName}</Box>
+        <Box textAlign={"center"} padding="10px 0">Welcome back {displayName}</Box>
         <Box
           fontSize={{ _: "1.2rem", md: "1.5rem" }}
           color="#007BFF"
