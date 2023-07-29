@@ -1,21 +1,21 @@
 // pages/dashboard.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import {  signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/utils/firebase";
+import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "@/redux/slice/authSlice";
+import { useDispatch } from "react-redux";
 const transactions = [
   { id: 1, description: "Coffee", amount: -3.5 },
   { id: 2, description: "Salary", amount: 20000 },
   { id: 3, description: "Groceries", amount: -50.75 },
- 
 ];
 
 const Dashboard = () => {
-  const availableBalance = 214500.25; 
+  const availableBalance = 214500.25;
   const router = useRouter();
   const handleLogout = () => {
-    
     console.log("User logged out");
 
     signOut(auth)
@@ -24,8 +24,32 @@ const Dashboard = () => {
       })
       .catch((error) => {});
   };
-  const name = typeof window !== "undefined" && localStorage.getItem("name")
 
+  const dispatch = useDispatch();
+  const [displayName, setDisplayName] = useState("");
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.displayName === null) {
+          const u1 = user.email.substring(0, user.email.indexOf("@"));
+          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+          setDisplayName(uName);
+        } else {
+          setDisplayName(user.displayName);
+        }
+
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userID: user.uid,
+          })
+        );
+      } else {
+        setDisplayName("");
+        dispatch(REMOVE_ACTIVE_USER);
+      }
+    });
+  }, [displayName, dispatch]);
   return (
     <Box padding="2rem" backgroundColor="#F0F2F5" minHeight="100vh">
       <Box
@@ -49,6 +73,7 @@ const Dashboard = () => {
           Log Out
         </Button>
       </Box>
+
       <Box
         marginTop="1rem"
         padding="1rem"
@@ -56,6 +81,7 @@ const Dashboard = () => {
         borderRadius="8px"
         boxShadow="0px 4px 10px rgba(0, 0, 0, 0.1)"
       >
+        <Box textAlign="left">Welcome back {displayName}</Box>
         <Box
           fontSize={{ _: "1.2rem", md: "1.5rem" }}
           color="#007BFF"
@@ -64,7 +90,7 @@ const Dashboard = () => {
           mb="1rem"
           alignItems={"center"}
         >
-          {name} Available Balance: ${availableBalance.toFixed(2)}
+          Available Balance: ${availableBalance.toFixed(2)}
         </Box>
         {/* <Box textAlign="center">
           <Button
