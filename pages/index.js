@@ -1,15 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import { useState, useEffect } from "react";
 import {
-  Center,
-  FormControl,
-  FormLabel,
-  Spinner,
-  Input,
-  Button,
   Box,
 } from "@chakra-ui/react";
 import Login from "@/components/Login";
@@ -17,28 +10,8 @@ import Login from "@/components/Login";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-  if (loading) {
-    return (
-      <>
-        <Box
-          fontSize="3rem"
-          color="#FFFFFF"
-          animation="fadeIn 2s"
-          
-        >
-          Starlight Finance
-        </Box>
-      </>
-    );
-  } else {
-    return (
+  return (
       <>
         <Head>
           <title>Create Next App</title>
@@ -48,7 +21,8 @@ export default function Home() {
         </Head>
 
         <Login />
+        
       </>
     );
   }
-}
+
