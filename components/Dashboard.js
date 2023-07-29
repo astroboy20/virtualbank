@@ -62,7 +62,7 @@ const Dashboard = () => {
         alignItems="center"
       >
         <Box as="h2" fontSize={{ _: "1.5rem", md: "2rem" }}>
-          Starlight Finance
+          Capital-One Bank
         </Box>
         <Button
           backgroundColor="#18A558"
