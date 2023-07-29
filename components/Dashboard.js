@@ -28,13 +28,16 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
   const [displayName, setDisplayName] = useState("");
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         if (user.displayName === null) {
           const u1 = user.email.substring(0, user.email.indexOf("@"));
           const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
-          setDisplayName(uName);
+          const textWithoutNumbers = uName.replace(/\d+/g, "");
+          const text = textWithoutNumbers;
+          setDisplayName(text);
         } else {
           setDisplayName(user.displayName);
         }
@@ -82,7 +85,9 @@ const Dashboard = () => {
         borderRadius="8px"
         boxShadow="0px 4px 10px rgba(0, 0, 0, 0.1)"
       >
-        <Box textAlign={"center"} padding="10px 0">Welcome back {displayName}</Box>
+        <Box textAlign={"center"} padding="10px 0">
+          Welcome back {displayName} 
+        </Box>
         <Box
           fontSize={{ _: "1.2rem", md: "1.5rem" }}
           color="#007BFF"
