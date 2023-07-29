@@ -2,6 +2,7 @@
 import React from 'react';
 import { Box, Button }  from "@chakra-ui/react";;
 
+
 const transactions = [
   { id: 1, description: 'Coffee', amount: -3.5 },
   { id: 2, description: 'Salary', amount: 2000 },

@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading]=useState(false)
   const [password, setPassword] = useState("");
   const router = useRouter();
   const handleSubmit = (e) => {
@@ -69,10 +70,11 @@ const Login = () => {
             backgroundColor="#007BFF"
             color="#FFFFFF"
             marginBottom="1rem"
+            type="submit"
             _hover={{ backgroundColor: "#0056b3" }}
             _active={{ backgroundColor: "#004080" }}
             _focus={{ boxShadow: "0 0 0 2px rgba(0, 123, 255, 0.5)" }}
-            onClick={handleLogin}
+            onClick={handleSubmit}
             disabled={isLoading}
           >
             {isLoading ? (
