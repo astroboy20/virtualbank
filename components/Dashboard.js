@@ -8,7 +8,7 @@ import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "@/redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 const transactions = [
   { id: 1, description: "Coffee", amount: -3.5 },
-  { id: 2, description: "Salary", amount: 20000 },
+  { id: 2, description: "Salary", amount: 2000000 },
   { id: 3, description: "Groceries", amount: -50.75 },
 ];
 
