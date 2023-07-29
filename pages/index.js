@@ -18,7 +18,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -27,10 +27,14 @@ export default function Home() {
   if (loading) {
     return (
       <>
-        <Center style={{ height: "100vh", margin: "5vh auto" }}>
-          thkdymhmhmh
-          <Spinner color="#FFFFFF" size="3rem" />
-        </Center>
+        <Box
+          fontSize="3rem"
+          color="#FFFFFF"
+          animation="fadeIn 2s"
+          
+        >
+          Starlight Finance
+        </Box>
       </>
     );
   } else {
