@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Spinner, Input, Button, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/utils/firebase";
 
 const Login = () => {
@@ -15,18 +15,33 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user)
-        setIsLoading(false)
+        console.log(user);
+        setIsLoading(false);
         router.push("/dashboard");
-        
+        typeof window !== "undefined" &&
+          localStorage.setItem("name", user.displayName);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setIsLoading(false)
+        setIsLoading(false);
       });
   };
-  
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (user.displayName === null) {
+          const u1 = user.email.substring(0, user.email.indexOf("@"));
+          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+          setDisplayName(uName);
+        } else {
+          setDisplayName(user.displayName);
+        }
+      }
+    });
+  }, []);
+
   return (
     <Box
       display="flex"

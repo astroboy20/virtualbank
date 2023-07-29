@@ -24,6 +24,7 @@ const Dashboard = () => {
       })
       .catch((error) => {});
   };
+  const name = typeof window !== "undefined" && localStorage.getItem("name")
 
   return (
     <Box padding="2rem" backgroundColor="#F0F2F5" minHeight="100vh">
@@ -63,7 +64,7 @@ const Dashboard = () => {
           mb="1rem"
           alignItems={"center"}
         >
-          Available Balance: ${availableBalance.toFixed(2)}
+          {name} Available Balance: ${availableBalance.toFixed(2)}
         </Box>
         {/* <Box textAlign="center">
           <Button
