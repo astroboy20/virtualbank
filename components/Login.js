@@ -66,7 +66,7 @@ const Login = () => {
             color="#007BFF"
             mb="2rem"
           >
-            Starlight Finance
+            Capital-one Bank
           </Box>
         </Box>
         <Box display={"flex"} flexDirection={"column"} padding="2rem">

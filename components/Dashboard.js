@@ -7,13 +7,14 @@ import { auth } from "@/utils/firebase";
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "@/redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 const transactions = [
-  { id: 1, description: "Coffee", amount: -3.5 },
-  { id: 2, description: "Salary", amount: 2000000 },
-  { id: 3, description: "Groceries", amount: -50.75 },
+  { id: 1, description: "Money-Deposit", amount: 800000 },
+  { id: 2, description: "Coffee", amount: -3.5 },
+  { id: 3, description: "Salary", amount: 2000000 },
+  { id: 4, description: "Groceries", amount: -50.75 },
 ];
 
 const Dashboard = () => {
-  const availableBalance = 214500.25;
+  const availableBalance = 800000;
   const router = useRouter();
   const handleLogout = () => {
     console.log("User logged out");
