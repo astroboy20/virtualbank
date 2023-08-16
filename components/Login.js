@@ -3,11 +3,13 @@ import { Spinner, Input, Button, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/utils/firebase";
+import Image from "next/image";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
+  const [isError, setIsError] = useState(" ")
   const router = useRouter();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setIsLoading(false);
+        setIsError(error.message)
       });
   };
 
@@ -60,15 +63,12 @@ const Login = () => {
         padding="2rem"
       >
         <Box textAlign="center">
-          <Box
-            fontSize={{ _: "1.5rem", md: "2rem" }}
-            fontWeight="bold"
-            color="#007BFF"
-            mb="2rem"
-          >
-            Capital-One Bank
-          </Box>
+          <Image src={"/logo.png"} width={300} height={300} alt="logo"/>
         </Box>
+        <Box background={"red"} color={"#fff"} padding={"10px"}> 
+        {isError}
+        </Box>
+        
         <Box display={"flex"} flexDirection={"column"} padding="2rem">
           <Input
             type="email"
@@ -92,7 +92,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
-            backgroundColor="#007BFF"
+            backgroundColor="#005288"
             color="#FFFFFF"
             marginBottom="1rem"
             type="submit"
