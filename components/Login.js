@@ -9,7 +9,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
-  const [isError, setIsError] = useState(" ")
+  const [isError, setIsError] = useState(" ");
+  const [message, setMessage] = useState(true);
   const router = useRouter();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +28,8 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setIsLoading(false);
-        setIsError(error.message)
+        setIsError(error.message);
+        setMessage(false);
       });
   };
 
@@ -63,12 +65,16 @@ const Login = () => {
         padding="2rem"
       >
         <Box textAlign="center">
-          <Image src={"/logo.png"} width={300} height={300} alt="logo"/>
+          <Image src={"/logo.png"} width={300} height={300} alt="logo" />
         </Box>
-        <Box background={"red"} color={"#fff"} padding={"10px"}> 
-        {isError}
-        </Box>
-        
+        {message ? (
+          ""
+        ) : (
+          <Box background={"red"} color={"#fff"} padding={"10px"}>
+            {isError}
+          </Box>
+        )}
+
         <Box display={"flex"} flexDirection={"column"} padding="2rem">
           <Input
             type="email"
